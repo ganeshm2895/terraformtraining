@@ -1,9 +1,3 @@
-provider "aws" {
-region = "eu-central-1"
-}
-
-
-
 data "aws_vpc" "default" {
 default = true
 }
@@ -15,7 +9,7 @@ values = [data.aws_vpc.default.id]
 }
 resource "aws_launch_configuration" "as_conf" {
 name = "lunch_configuration"
-image_id = "ami-09439f09c55136ecf"
+image_id = var.AMIS[var.AWS_REGION]
 instance_type = "t2.micro"
 security_groups = [aws_security_group.instance.id]
 associate_public_ip_address = true
